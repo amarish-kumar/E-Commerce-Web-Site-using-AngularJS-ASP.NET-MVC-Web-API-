@@ -1,0 +1,31 @@
+﻿<div class="row  col-md-6">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Current Command List</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Command Date</th>
+                    <th>Product Name</th>
+                    <th>Consumer</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="cmd in commandList">
+                <tr>
+                    <td>{{cmd.CommandDate}}</td>
+                    <td>{{cmd.ProductName}}</td>
+                    <td>{{cmd.loginUser}}</td>
+                    <td>
+                        <select name="repeatSelect" id="repeatSelect"
+                                ng-change="updateCommand(cmd.CommandId, cmd.Status)" ng-model="cmd.Status">
+                            <option value="Received">Received</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Finish">Finish</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>

@@ -1,0 +1,75 @@
+﻿<div class="row">
+    <div class="col-sm-3">
+        <div>
+            <form role="search">
+                <label>Search Product </label>
+                    <div class="form-group">
+                        <div class="col-sm-8 form-group">
+                            <input class="form-control" type="text" ng-model="term" placeholder="filter by name" />
+                        </div>
+                        <a ng-click="showFormAddProduct()" class="btn btn-default btn-circle"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                    </div>
+            </form>
+        </div>
+        <br>
+        <div>
+            <div ng-repeat="elem in productList | fetch : term">
+                <div ng-click="bindProductDetails(elem)">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <img class="img-thumbnail" ng-src="/Content/Images/{{elem.imageProduct}}"></img>
+                        </div>
+                        <div class="col-sm-4 left">
+                            <label>
+                                {{elem.nameProduct}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <br>
+        <br>
+        <br>
+        <br>
+        <form class="form-horizontal  ng-hide" ng-show="stateFormShow">
+            <div class="form-group" ng-show="stateIsUpdate">
+                <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
+                <div class="col-sm-10">
+                    <input type="text" value="{{master.idProduct}}" ng-model="master.idProduct" class="form-control" placeholder="put Product Name" readonly>
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" value="{{master.nameProduct}}" ng-mod ng-model="master.nameProduct" class="form-control" placeholder="Put Product Nam" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea ng-model="master.descriptionProduct" class="form-control" placeholder="Put description">{{master.descriptionProduct}}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Price</label>
+                <div class="col-sm-10">
+                    <input type="number" value="{{master.price}}" ng-model="master.price" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">File</label>
+                <div class="col-sm-10">
+                    <input type="file" id="myFile" name="myFile" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-click="saveP()" class="btn btn-default">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

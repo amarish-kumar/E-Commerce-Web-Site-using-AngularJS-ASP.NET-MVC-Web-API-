@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EC_Command">
+          <Key>
+            <PropertyRef Name="_id" />
+          </Key>
+          <Property Name="_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loginUser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="_status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CommandDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EC_Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameProduct" Type="varchar" MaxLength="100" />
+          <Property Name="descriptionProduct" Type="varchar" MaxLength="500" />
+          <Property Name="imageProduct" Type="varchar" MaxLength="200" />
+          <Property Name="price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EC_User">
+          <Key>
+            <PropertyRef Name="loginUser" />
+          </Key>
+          <Property Name="loginUser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="mpUser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="_Type" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__EC_Comman__idPro__02084FDA">
+          <End Role="EC_Product" Type="Self.EC_Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EC_Command" Type="Self.EC_Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EC_Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="EC_Command">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EC_Comman__login__02FC7413">
+          <End Role="EC_User" Type="Self.EC_User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EC_Command" Type="Self.EC_Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EC_User">
+              <PropertyRef Name="loginUser" />
+            </Principal>
+            <Dependent Role="EC_Command">
+              <PropertyRef Name="loginUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="EC_Command" EntityType="Self.EC_Command" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EC_Product" EntityType="Self.EC_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EC_User" EntityType="Self.EC_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EC_Comman__idPro__02084FDA" Association="Self.FK__EC_Comman__idPro__02084FDA">
+            <End Role="EC_Product" EntitySet="EC_Product" />
+            <End Role="EC_Command" EntitySet="EC_Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EC_Comman__login__02FC7413" Association="Self.FK__EC_Comman__login__02FC7413">
+            <End Role="EC_User" EntitySet="EC_User" />
+            <End Role="EC_Command" EntitySet="EC_Command" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EC_Product" EntityType="Model.EC_Product" />
+          <EntitySet Name="EC_User" EntityType="Model.EC_User" />
+          <EntitySet Name="EC_Command" EntityType="Model.EC_Command" />
+          <AssociationSet Name="FK__EC_Comman__idPro__02084FDA" Association="Model.FK__EC_Comman__idPro__02084FDA">
+            <End Role="EC_Product" EntitySet="EC_Product" />
+            <End Role="EC_Command" EntitySet="EC_Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EC_Comman__login__02FC7413" Association="Model.FK__EC_Comman__login__02FC7413">
+            <End Role="EC_User" EntitySet="EC_User" />
+            <End Role="EC_Command" EntitySet="EC_Command" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="EC_Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descriptionProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imageProduct" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EC_Command" Relationship="Model.FK__EC_Comman__idPro__02084FDA" FromRole="EC_Product" ToRole="EC_Command" />
+        </EntityType>
+        <EntityType Name="EC_User">
+          <Key>
+            <PropertyRef Name="loginUser" />
+          </Key>
+          <Property Name="loginUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="mpUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C_Type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EC_Command" Relationship="Model.FK__EC_Comman__login__02FC7413" FromRole="EC_User" ToRole="EC_Command" />
+        </EntityType>
+        <EntityType Name="EC_Command">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loginUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="C_status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CommandDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="EC_Product" Relationship="Model.FK__EC_Comman__idPro__02084FDA" FromRole="EC_Command" ToRole="EC_Product" />
+          <NavigationProperty Name="EC_User" Relationship="Model.FK__EC_Comman__login__02FC7413" FromRole="EC_Command" ToRole="EC_User" />
+        </EntityType>
+        <Association Name="FK__EC_Comman__idPro__02084FDA">
+          <End Type="Model.EC_Product" Role="EC_Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.EC_Command" Role="EC_Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EC_Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="EC_Command">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EC_Comman__login__02FC7413">
+          <End Type="Model.EC_User" Role="EC_User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.EC_Command" Role="EC_Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EC_User">
+              <PropertyRef Name="loginUser" />
+            </Principal>
+            <Dependent Role="EC_Command">
+              <PropertyRef Name="loginUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="EC_Product">
+            <EntityTypeMapping TypeName="Model.EC_Product">
+              <MappingFragment StoreEntitySet="EC_Product">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
+                <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EC_User">
+            <EntityTypeMapping TypeName="Model.EC_User">
+              <MappingFragment StoreEntitySet="EC_User">
+                <ScalarProperty Name="C_Type" ColumnName="_Type" />
+                <ScalarProperty Name="mpUser" ColumnName="mpUser" />
+                <ScalarProperty Name="loginUser" ColumnName="loginUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EC_Command">
+            <EntityTypeMapping TypeName="Model.EC_Command">
+              <MappingFragment StoreEntitySet="EC_Command">
+                <ScalarProperty Name="CommandDate" ColumnName="CommandDate" />
+                <ScalarProperty Name="C_status" ColumnName="_status" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="loginUser" ColumnName="loginUser" />
+                <ScalarProperty Name="C_id" ColumnName="_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

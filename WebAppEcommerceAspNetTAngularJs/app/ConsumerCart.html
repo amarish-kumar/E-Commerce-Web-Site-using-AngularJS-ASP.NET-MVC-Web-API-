@@ -1,0 +1,39 @@
+﻿<div class="row  col-md-8">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Shopping List</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Details</th>
+                    <th>Count</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="cart in CartList">
+                <tr>
+                    <td  class="col-md-3">
+                        <img class="img-responsive" width="100" height="100" ng-src="/Content/Images/{{cart.imageProduct}}"></img>
+                    </td>
+                    <td class="col-md-3">
+                        <strong>{{cart.nameProduct}}</strong>
+                        <br />
+                        {{cart.descriptionProduct}}
+                    </td>
+                    <td class="col-md-3">
+                        {{Cart[cart.idProduct]}}
+                    </td>
+                    <td class="col-md-3">
+                        <a href="#" ng-click="RemoveFromCart(cart)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button class="btn btn-default btn-primary" ng-show="CartIsNotEmpty" ng-click="insertCommand()">
+                <span class="glyphicon glyphicon-shopping-cart"> Buy</span>
+            </button>
+        </div>
+    </div>
+</div>

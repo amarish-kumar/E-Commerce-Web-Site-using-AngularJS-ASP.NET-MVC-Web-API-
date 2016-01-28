@@ -1,0 +1,24 @@
+﻿<div class="row  col-md-6">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Commands List</div>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Command Date</th>
+                    <th>Product Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="cmd in commandList">
+                <tr>
+                    <td>{{cmd.CommandDate}}</td>
+                    <td>{{cmd.ProductName}}</td>
+                    <td>{{cmd.Status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+  

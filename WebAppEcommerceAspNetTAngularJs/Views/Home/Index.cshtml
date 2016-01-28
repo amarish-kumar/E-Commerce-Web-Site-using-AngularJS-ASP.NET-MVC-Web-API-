@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/Module1.js"></script>
+<div class="row" ng-app="app">
+    <div ng-controller="myController">
+        <div class="col-sm-4">
+            <div>
+                Doing the search
+                <form>
+                    <input type="text" ng-model="term" placeholder="filter by name" />
+                    <button type="submit"  ng-click="showFormAddUser()">add</button>
+                </form>
+            </div>
+            <div>
+                <div ng-repeat="elem in items | fetch : term">
+                    <p ng-click="bindUserDetails(elem)"><img class="img-rounded" width="50" height="50" src="{{elem.img}}" /> Name : {{elem.name}} Age : {{elem.age}}  </p><button href="#" ng-click="deleteUser(elem.id)">delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+     <br><br>
+            <form class="form-horizontal  ng-hide" ng-show="stateFormShow">
+                <div class="form-group" ng-show="stateIsUpdate">
+                    <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{master.id}}" ng-model="master.id" class="form-control" id="inputEmail3" placeholder="Email" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">name</label>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{master.name}}" ng-model="master.name" class="form-control" id="inputEmail3" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">age</label>
+                    <div class="col-sm-10">
+                        <input type="number" value="{{master.age}}" ng-model="master.age" class="form-control" id="inputEmail3" placeholder="Age">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-click="saveP(master)" class="btn btn-default">Save</button>
+                    </div>
+                </div>
+            </form>
+           
+        </div>
+    </div>
+
+</div>
